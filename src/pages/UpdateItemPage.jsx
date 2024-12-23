@@ -6,7 +6,7 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
 const UpdateItemPage = () => {
-  const { id } = useParams(); // Get item ID from URL
+  const { id } = useParams(); 
   const navigate = useNavigate();
   const [itemData, setItemData] = useState(null);
   const [dateLost, setDateLost] = useState(new Date());
