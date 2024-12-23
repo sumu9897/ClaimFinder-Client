@@ -58,7 +58,7 @@ const Home = () => {
           ))}
         </div>
         <button
-          className="block mx-auto mt-6 bg-blue-500 text-white py-2 px-4 rounded"
+          className="block mx-auto mt-6 bg-blue-500 text-white px-8 py-3 rounded-tr-2xl rounded-bl-2xl"
           onClick={() => navigate('/allItems')}
         >
           See All
@@ -67,7 +67,7 @@ const Home = () => {
 
       {/* Extra Section 1: About Us */}
       <motion.section
-        className="about-us mb-10"
+        className="about-us mb-10 mx-auto"
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.8 }}
