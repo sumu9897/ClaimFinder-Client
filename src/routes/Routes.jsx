@@ -9,6 +9,7 @@ import AddItemPage from '../pages/AddItemPage'
 import AllRecoveredPage from '../pages/AllRecoveredPage'
 import MyItemsPage from '../pages/MyItemsPage'
 import AllItemsPage from '../pages/AllItemsPage'
+import ItemDetailsPage from '../pages/ItemDetailsPage'
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
         path: '/myItems',
         element: <PrivateRoute><MyItemsPage/></PrivateRoute>
       },
+      {
+        path: '/items/:id',
+        element : <PrivateRoute><ItemDetailsPage/></PrivateRoute>
+      }
       
       
     ],

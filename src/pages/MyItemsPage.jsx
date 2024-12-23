@@ -1,25 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../providers/AuthProvider';
 
 const MyItemsPage = () => {
+  const { user } = useContext(AuthContext);
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
-  const userEmail = "user@example.com"; // Replace with the logged-in user's email from context or state
 
   useEffect(() => {
+    if (!user?.email) return; // Prevent fetching if user email is not available
     const fetchMyItems = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/myItems`, {
-          params: { email: userEmail },
-        });
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/myItems/${user.email}`
+        );
         setItems(response.data);
       } catch (error) {
         console.error('Failed to fetch items:', error);
       }
     };
     fetchMyItems();
-  }, [userEmail]);
+  }, [user?.email]);
 
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this item?')) {
