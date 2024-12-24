@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import bgImg from '../../assets/images/bgImg.jpeg'
+import bgImg from '../../assets/images/login.webp'
 import logo from '../../assets/images/logo.png'
 import { useContext } from 'react'
 import { AuthContext } from '../../providers/AuthProvider'
@@ -46,7 +46,7 @@ const Login = () => {
     <div className='flex justify-center items-center min-h-[calc(100vh-306px)] my-12'>
       <div className='flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl '>
         <div
-          className='hidden bg-cover bg-center lg:block lg:w-1/2'
+          className='hidden bg-cover bg-center lg:block lg:w-1/2 '
           style={{
             backgroundImage: `url(${bgImg})`,
           }}
@@ -54,7 +54,7 @@ const Login = () => {
 
         <div className='w-full px-6 py-8 md:px-8 lg:w-1/2'>
           <div className='flex justify-center mx-auto'>
-            <img className='w-auto h-7 sm:h-8' src={logo} alt='' />
+            <img className='w-auto h-6 sm:h-8' src={logo} alt='' />
           </div>
 
           <p className='mt-3 text-xl text-center text-gray-600 '>

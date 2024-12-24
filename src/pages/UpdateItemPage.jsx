@@ -6,7 +6,7 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
 const UpdateItemPage = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const navigate = useNavigate();
   const [itemData, setItemData] = useState(null);
   const [dateLost, setDateLost] = useState(new Date());
@@ -36,6 +36,7 @@ const UpdateItemPage = () => {
       category: form.category.value,
       location: form.location.value,
       dateLost,
+      thumbnail: form.thumbnail.value,
     };
 
     try {
@@ -49,7 +50,7 @@ const UpdateItemPage = () => {
   };
 
   if (!itemData) {
-    return <div>Loading...</div>;
+    return <div className="flex justify-center items-center min-h-screen">Loading...</div>;
   }
 
   return (
@@ -124,6 +125,17 @@ const UpdateItemPage = () => {
                 name="contact"
                 defaultValue={itemData.contact}
                 readOnly
+                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring focus:ring-blue-300 focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="thumbnail" className="text-gray-700">Thumbnail</label>
+              <input
+                type="url"
+                id="thumbnail"
+                name="thumbnail"
+                defaultValue={itemData.thumbnail}
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring focus:ring-blue-300 focus:outline-none"
               />
             </div>

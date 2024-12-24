@@ -20,7 +20,7 @@ const AddItemPage = () => {
     const category = form.category.value;
     const location = form.location.value;
     const contact = form.contact.value;
-    const thumbnail = form.thumbnail.files[0];
+    const thumbnail = form.thumbnail.value;
 
     const formData = {
         postType,
@@ -115,7 +115,7 @@ const AddItemPage = () => {
             <div>
               <label htmlFor="thumbnail" className="text-gray-700">Thumbnail</label>
               <input
-                type="file"
+                type="url"
                 id="thumbnail"
                 name="thumbnail"
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring focus:ring-blue-300 focus:outline-none"

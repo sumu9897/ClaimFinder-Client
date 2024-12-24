@@ -93,13 +93,14 @@ const Registration = () => {
           <form onSubmit={handleSignUp}>
             <div className="mt-4">
               <label className="block mb-2 text-sm font-medium text-gray-600" htmlFor="name">
-                Username
+                User Name
               </label>
               <input
                 id="name"
                 name="name"
                 type="text"
                 autoComplete="name"
+                placeholder='Enter User Name'
                 className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-400 focus:ring focus:ring-blue-300 focus:outline-none"
               />
             </div>
@@ -112,6 +113,7 @@ const Registration = () => {
                 name="photo"
                 type="text"
                 autoComplete="photo"
+                placeholder='Enter Photo URL'
                 className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-400 focus:ring focus:ring-blue-300 focus:outline-none"
               />
             </div>
@@ -124,6 +126,7 @@ const Registration = () => {
                 name="email"
                 type="email"
                 autoComplete="email"
+                placeholder='Enter Email'
                 className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-400 focus:ring focus:ring-blue-300 focus:outline-none"
               />
             </div>
@@ -136,6 +139,7 @@ const Registration = () => {
                 name="password"
                 type="password"
                 autoComplete="current-password"
+                placeholder="Password"
                 className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-400 focus:ring focus:ring-blue-300 focus:outline-none"
               />
             </div>
