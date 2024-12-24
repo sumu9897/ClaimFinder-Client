@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 const UpdateItemPage = () => {
   const { id } = useParams();
@@ -55,6 +56,9 @@ const UpdateItemPage = () => {
 
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
+        <Helmet>
+            <title>Update Item</title>
+        </Helmet>
       <section className="p-6 mx-auto bg-white rounded-md shadow-md">
         <h2 className="text-lg font-semibold text-gray-700">Update Lost & Found Item</h2>
         <form onSubmit={handleUpdate}>

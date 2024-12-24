@@ -5,6 +5,7 @@ import { AuthContext } from '../providers/AuthProvider';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const AddItemPage = () => {
   const navigate = useNavigate();
@@ -50,6 +51,9 @@ const AddItemPage = () => {
 
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
+        <Helmet>
+            <title>AddItem</title>
+        </Helmet>
       <section className="p-6 mx-auto bg-white rounded-md shadow-md">
         <h2 className="text-lg font-semibold text-gray-700">Add Lost & Found Item</h2>
         <form onSubmit={handleSubmit} encType="multipart/form-data">

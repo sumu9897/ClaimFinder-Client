@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../providers/AuthProvider';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const ItemDetailsPage = () => {
   const { id } = useParams();
@@ -63,10 +64,17 @@ const ItemDetailsPage = () => {
     }
   };
 
-  if (loading) return <div className="text-center">Loading...</div>;
+  const handleInvalidClick = () => {
+    toast.error('This item is already marked as recovered.');
+  };
+
+  if (loading) return <div className="text-center"><LoadingSpinner/></div>;
 
   return item ? (
     <div className="container mx-auto p-6">
+        <Helmet>
+            <title>Item Details</title>I
+        </Helmet>
       <h1 className="text-3xl font-bold mb-4">{item.title}</h1>
       <img src={item.thumbnail} alt={item.title} className="w-full h-96 object-cover rounded-md mb-4" />
       <p className="text-gray-700">{item.description}</p>
@@ -80,6 +88,14 @@ const ItemDetailsPage = () => {
         <button
           onClick={() => setShowModal(true)}
           className="mt-6 px-4 py-2 bg-blue-600 text-white rounded-md"
+        >
+          {item.postType === 'Lost' ? 'Found This!' : 'This is Mine!'}
+        </button>
+      )}
+      {item.isRecovered && (
+        <button
+          onClick={handleInvalidClick}
+          className="mt-6 px-4 py-2 bg-gray-400 text-white rounded-md cursor-not-allowed"
         >
           {item.postType === 'Lost' ? 'Found This!' : 'This is Mine!'}
         </button>

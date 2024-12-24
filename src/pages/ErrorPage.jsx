@@ -1,9 +1,13 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 text-center px-4">
+      <Helmet>
+        <title>Error Page</title>
+      </Helmet>
       {/* Animated 404 Number */}
       <div className="text-9xl font-extrabold text-gray-800 animate-pulse">
         404

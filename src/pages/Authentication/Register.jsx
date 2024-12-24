@@ -4,6 +4,7 @@ import logo from '../../assets/images/logo.png';
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -54,6 +55,9 @@ const Registration = () => {
 
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
+      <Helmet>
+              <title>Registration | Whereisit</title>
+      </Helmet>
       <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg lg:max-w-4xl">
         <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
           <div className="flex justify-center mx-auto">

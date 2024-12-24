@@ -3,12 +3,14 @@ import axios from 'axios';
 import { AuthContext } from '../providers/AuthProvider';
 import { toast } from 'react-hot-toast';
 import { FaTh, FaList } from 'react-icons/fa';
+import LoadingSpinner from '../components/LoadingSpinner';
+import { Helmet } from 'react-helmet-async';
 
 const AllRecoveredItemsPage = () => {
   const { user } = useContext(AuthContext);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isTableLayout, setIsTableLayout] = useState(false); // Toggle layout
+  const [isTableLayout, setIsTableLayout] = useState(false);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -31,11 +33,14 @@ const AllRecoveredItemsPage = () => {
   }, [user?.email]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner />;
   }
 
   return (
     <div className="min-h-[calc(100vh-306px)] flex flex-col items-center my-12">
+        <Helmet>
+            <title>All Recovered Item</title>
+        </Helmet>
       <h2 className="text-2xl font-semibold mb-6">All Recovered Items</h2>
       {items.length === 0 ? (
         <div className="text-center text-gray-700">
@@ -44,7 +49,6 @@ const AllRecoveredItemsPage = () => {
         </div>
       ) : (
         <>
-          {/* Layout Toggle Buttons */}
           <div className="flex justify-end w-full px-4 mb-6">
             <button
               onClick={() => setIsTableLayout(false)}
@@ -71,7 +75,6 @@ const AllRecoveredItemsPage = () => {
           </div>
 
           {isTableLayout ? (
-            // Table Layout
             <div className="overflow-x-auto w-full">
               <table className="table-auto w-full bg-white shadow-md rounded-md">
                 <thead className="bg-gray-200">
@@ -89,7 +92,9 @@ const AllRecoveredItemsPage = () => {
                       <td className="px-4 py-2">{item.category}</td>
                       <td className="px-4 py-2">{item.location}</td>
                       <td className="px-4 py-2">
-                        {new Date(item.dateRecovered).toLocaleDateString()}
+                        {item.dateRecovered
+                          ? new Date(item.dateRecovered).toLocaleDateString()
+                          : 'Date Not Available'}
                       </td>
                     </tr>
                   ))}
@@ -97,13 +102,9 @@ const AllRecoveredItemsPage = () => {
               </table>
             </div>
           ) : (
-            // Card Layout
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {items.map((item) => (
-                <div
-                  key={item._id}
-                  className="bg-white shadow-md rounded-md p-4 border border-gray-200"
-                >
+                <div key={item._id} className="bg-white shadow-md rounded-md p-4 border border-gray-200">
                   <h3 className="text-lg font-semibold">{item.title}</h3>
                   <p className="text-gray-600">
                     <strong>Category:</strong> {item.category}
@@ -113,7 +114,9 @@ const AllRecoveredItemsPage = () => {
                   </p>
                   <p className="text-gray-600">
                     <strong>Date Recovered:</strong>{' '}
-                    {new Date(item.dateRecovered).toLocaleDateString()}
+                    {item.dateRecovered
+                      ? new Date(item.dateRecovered).toLocaleDateString()
+                      : 'Date Not Available'}
                   </p>
                 </div>
               ))}

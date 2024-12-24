@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../providers/AuthProvider';
+import { Helmet } from 'react-helmet-async';
 
 const MyItemsPage = () => {
   const { user } = useContext(AuthContext);
@@ -41,6 +42,9 @@ const MyItemsPage = () => {
 
   return (
     <div className="container mx-auto p-6">
+        <Helmet>
+            <title>My Items</title>
+        </Helmet>
       <h1 className="text-2xl font-bold text-center mb-6">My Items</h1>
 
       {notification && (

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
   const [items, setItems] = useState([]);
@@ -21,6 +22,9 @@ const Home = () => {
 
   return (
     <div className="container mx-auto p-6">
+      <Helmet>
+        <title>Home | Whereisit</title>
+      </Helmet>
       {/* Banner Section */}
       <motion.div
         className="slider mb-10"
