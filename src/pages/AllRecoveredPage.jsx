@@ -2,11 +2,13 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../providers/AuthProvider';
 import { toast } from 'react-hot-toast';
+import { FaTh, FaList } from 'react-icons/fa';
 
 const AllRecoveredItemsPage = () => {
   const { user } = useContext(AuthContext);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isTableLayout, setIsTableLayout] = useState(false); // Toggle layout
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -41,30 +43,83 @@ const AllRecoveredItemsPage = () => {
           <p>Start adding your recovered items to see them here.</p>
         </div>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="table-auto w-full bg-white shadow-md rounded-md">
-            <thead className="bg-gray-200">
-              <tr>
-                <th className="px-4 py-2 text-left">Title</th>
-                <th className="px-4 py-2 text-left">Category</th>
-                <th className="px-4 py-2 text-left">Location</th>
-                <th className="px-4 py-2 text-left">Date Recovered</th>
-              </tr>
-            </thead>
-            <tbody>
+        <>
+          {/* Layout Toggle Buttons */}
+          <div className="flex justify-end w-full px-4 mb-6">
+            <button
+              onClick={() => setIsTableLayout(false)}
+              className={`flex items-center px-4 py-2 border rounded-l-md ${
+                !isTableLayout
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+              }`}
+            >
+              <FaTh className="mr-2" />
+              Grid View
+            </button>
+            <button
+              onClick={() => setIsTableLayout(true)}
+              className={`flex items-center px-4 py-2 border rounded-r-md ${
+                isTableLayout
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+              }`}
+            >
+              <FaList className="mr-2" />
+              Table View
+            </button>
+          </div>
+
+          {isTableLayout ? (
+            // Table Layout
+            <div className="overflow-x-auto w-full">
+              <table className="table-auto w-full bg-white shadow-md rounded-md">
+                <thead className="bg-gray-200">
+                  <tr>
+                    <th className="px-4 py-2 text-left">Title</th>
+                    <th className="px-4 py-2 text-left">Category</th>
+                    <th className="px-4 py-2 text-left">Location</th>
+                    <th className="px-4 py-2 text-left">Date Recovered</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {items.map((item) => (
+                    <tr key={item._id} className="border-t">
+                      <td className="px-4 py-2">{item.title}</td>
+                      <td className="px-4 py-2">{item.category}</td>
+                      <td className="px-4 py-2">{item.location}</td>
+                      <td className="px-4 py-2">
+                        {new Date(item.dateRecovered).toLocaleDateString()}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            // Card Layout
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {items.map((item) => (
-                <tr key={item._id} className="border-t">
-                  <td className="px-4 py-2">{item.title}</td>
-                  <td className="px-4 py-2">{item.category}</td>
-                  <td className="px-4 py-2">{item.location}</td>
-                  <td className="px-4 py-2">
+                <div
+                  key={item._id}
+                  className="bg-white shadow-md rounded-md p-4 border border-gray-200"
+                >
+                  <h3 className="text-lg font-semibold">{item.title}</h3>
+                  <p className="text-gray-600">
+                    <strong>Category:</strong> {item.category}
+                  </p>
+                  <p className="text-gray-600">
+                    <strong>Location:</strong> {item.location}
+                  </p>
+                  <p className="text-gray-600">
+                    <strong>Date Recovered:</strong>{' '}
                     {new Date(item.dateRecovered).toLocaleDateString()}
-                  </td>
-                </tr>
+                  </p>
+                </div>
               ))}
-            </tbody>
-          </table>
-        </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
