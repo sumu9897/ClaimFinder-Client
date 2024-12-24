@@ -27,7 +27,7 @@ const ItemCard = ({ item }) => {
         </div>
         <Link
           to={`/items/${_id}`}
-          className="block mt-4 text-blue-500 font-medium hover:underline"
+          className="block mt-4 text-blue-500 text-center font-medium hover:underline"
         >
           View Details
         </Link>
