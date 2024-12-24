@@ -1,9 +1,9 @@
-# WhereIsIt: A Lost and Found Platform
+# ClaimFinder: A Lost and Found Platform
 
 [Live Site Link](https://whereisit-fde86.web.app/)
 
 ## Project Overview
-WhereIsIt is a full-stack web application designed to help users reconnect with their lost or found items. The platform allows users to report lost belongings, browse through found items, and recover their possessions through a secure and interactive interface.
+ClaimFinder is a full-stack web application designed to help users reconnect with their lost or found items. The platform allows users to report lost belongings, browse through found items, and recover their possessions through a secure and interactive interface.
 
 ## Key Features
 - **User Authentication**: Secure login and registration using email/password and Google login.

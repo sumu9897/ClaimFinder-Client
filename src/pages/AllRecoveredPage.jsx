@@ -76,13 +76,13 @@ const AllRecoveredItemsPage = () => {
 
           {isTableLayout ? (
             <div className="overflow-x-auto w-full">
-              <table className="table-auto w-full bg-white shadow-md rounded-md">
+              <table className="table-auto sm:w-full md:w-2/3 mx-auto bg-white shadow-md rounded-md">
                 <thead className="bg-gray-200">
                   <tr>
                     <th className="px-4 py-2 text-left">Title</th>
                     <th className="px-4 py-2 text-left">Category</th>
                     <th className="px-4 py-2 text-left">Location</th>
-                    <th className="px-4 py-2 text-left">Date Recovered</th>
+                    <th className="px-4 py-2 text-left">Lost Date</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -92,8 +92,8 @@ const AllRecoveredItemsPage = () => {
                       <td className="px-4 py-2">{item.category}</td>
                       <td className="px-4 py-2">{item.location}</td>
                       <td className="px-4 py-2">
-                        {item.dateRecovered
-                          ? new Date(item.dateRecovered).toLocaleDateString()
+                        {item.dateLost
+                          ? new Date(item.dateLost).toLocaleDateString()
                           : 'Date Not Available'}
                       </td>
                     </tr>
@@ -113,9 +113,9 @@ const AllRecoveredItemsPage = () => {
                     <strong>Location:</strong> {item.location}
                   </p>
                   <p className="text-gray-600">
-                    <strong>Date Recovered:</strong>{' '}
-                    {item.dateRecovered
-                      ? new Date(item.dateRecovered).toLocaleDateString()
+                    <strong>Lost Date:</strong>{' '}
+                    {item.dateLost
+                      ? new Date(item.dateLost).toLocaleDateString()
                       : 'Date Not Available'}
                   </p>
                 </div>

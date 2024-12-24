@@ -6,6 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../providers/AuthProvider';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { Helmet } from 'react-helmet-async';
 
 const ItemDetailsPage = () => {
   const { id } = useParams();
@@ -76,18 +77,19 @@ const ItemDetailsPage = () => {
             <title>Item Details</title>I
         </Helmet>
       <h1 className="text-3xl font-bold mb-4">{item.title}</h1>
-      <img src={item.thumbnail} alt={item.title} className="w-full h-96 object-cover rounded-md mb-4" />
-      <p className="text-gray-700">{item.description}</p>
-      <div className="mt-4">
+      <img src={item.thumbnail} alt={item.title} className="w-[500px] mx-auto object-cover rounded-md mb-4" />
+      <p className="text-gray-700 text-center">{item.description}</p>
+      <div className="mt-4 text-center">
         <p><strong>Category:</strong> {item.category}</p>
         <p><strong>Location:</strong> {item.location}</p>
         <p><strong>Date Lost:</strong> {new Date(item.dateLost).toLocaleDateString()}</p>
         <p><strong>Contact:</strong> {item.contact}</p>
       </div>
+      <div className='flex justify-center'>
       {!item.isRecovered && (
         <button
           onClick={() => setShowModal(true)}
-          className="mt-6 px-4 py-2 bg-blue-600 text-white rounded-md"
+          className="mt-6 px-4 py-2  bg-blue-600  text-white rounded-md"
         >
           {item.postType === 'Lost' ? 'Found This!' : 'This is Mine!'}
         </button>
@@ -95,11 +97,12 @@ const ItemDetailsPage = () => {
       {item.isRecovered && (
         <button
           onClick={handleInvalidClick}
-          className="mt-6 px-4 py-2 bg-gray-400 text-white rounded-md cursor-not-allowed"
+          className="mt-6 px-4 py-2  bg-gray-400  text-white rounded-md cursor-not-allowed"
         >
           {item.postType === 'Lost' ? 'Found This!' : 'This is Mine!'}
         </button>
       )}
+      </div>
 
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">

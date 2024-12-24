@@ -1,10 +1,11 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import bgImg from '../../assets/images/login.webp'
-import logo from '../../assets/images/logo.png'
+import logo from '../../assets/images/logo.webp'
 import { useContext } from 'react'
 import { AuthContext } from '../../providers/AuthProvider'
 import toast from 'react-hot-toast'
 import { Helmet } from 'react-helmet-async'
+import axios from 'axios'
 const Login = () => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -15,7 +16,10 @@ const Login = () => {
   // Google Signin
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle()
+      const result = await signInWithGoogle()
+
+      const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/jwt`,{user: result?.user?.email})
+      console.log(data);
 
       toast.success('Signin Successful')
       navigate(from, { replace: true })
@@ -46,7 +50,7 @@ const Login = () => {
   return (
     <div className='flex justify-center items-center min-h-[calc(100vh-306px)] my-12'>
       <Helmet>
-        <title>Login | Whereisit</title>
+        <title>Login | ClaimFinder</title>
       </Helmet>
       <div className='flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl '>
         <div

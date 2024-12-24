@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import bgImg from '../../assets/images/bgImg.jpeg';
-import logo from '../../assets/images/logo.png';
+import logo from '../../assets/images/logo.webp';
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import toast from 'react-hot-toast';
@@ -56,7 +56,7 @@ const Registration = () => {
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
       <Helmet>
-              <title>Registration | Whereisit</title>
+              <title>Registration | ClaimFinder</title>
       </Helmet>
       <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg lg:max-w-4xl">
         <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">

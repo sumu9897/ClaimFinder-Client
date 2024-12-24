@@ -10,7 +10,7 @@ const AllItemsPage = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(8); // Number of items per page
+    const [itemsPerPage] = useState(9);
 
     useEffect(() => {
         fetchAllItems();
@@ -109,7 +109,7 @@ const AllItemsPage = () => {
             </div>
 
             {/* Items Grid */}
-            <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-8 mt-8 lg:mt-16 px-16 md:grid-cols-2 lg:grid-cols-3">
                 {currentItems.map(item => (
                     <ItemCard key={item._id} item={item} />
                 ))}
