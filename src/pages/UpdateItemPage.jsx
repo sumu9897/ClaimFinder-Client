@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { Helmet } from 'react-helmet-async';
 import { FaTag, FaCalendarAlt, FaMapMarkerAlt, FaPhoneAlt, FaPen, FaImage } from 'react-icons/fa';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const UpdateItemPage = () => {
+    const axiosSecure = useAxiosSecure()
   const { id } = useParams();
   const navigate = useNavigate();
   const [itemData, setItemData] = useState(null);
@@ -17,7 +18,7 @@ const UpdateItemPage = () => {
   useEffect(() => {
     const fetchItemData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/items/${id}`);
+        const response = await axiosSecure.get(`/items/${id}`);
         setItemData(response.data);
         setDateLost(new Date(response.data.dateLost));
       } catch (error) {
@@ -41,7 +42,7 @@ const UpdateItemPage = () => {
     };
 
     try {
-      await axios.put(`${import.meta.env.VITE_API_URL}/items/${id}`, updatedData);
+      await axiosSecure.put(`/items/${id}`, updatedData,);
       toast.success('Item updated successfully!');
       navigate('/myItems');
     } catch (error) {

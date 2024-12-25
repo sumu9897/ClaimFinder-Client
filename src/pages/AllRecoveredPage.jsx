@@ -5,8 +5,10 @@ import { toast } from 'react-hot-toast';
 import { FaTh, FaList } from 'react-icons/fa';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Helmet } from 'react-helmet-async';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const AllRecoveredItemsPage = () => {
+    const axiosSecure= useAxiosSecure()
   const { user } = useContext(AuthContext);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,7 +17,7 @@ const AllRecoveredItemsPage = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/recovered-items`, {
+        const response = await axiosSecure.get(`/recovered-items`, {
           params: { userEmail: user?.email },
         });
         setItems(response.data);

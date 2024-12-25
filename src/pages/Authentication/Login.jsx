@@ -5,7 +5,6 @@ import { useContext } from 'react'
 import { AuthContext } from '../../providers/AuthProvider'
 import toast from 'react-hot-toast'
 import { Helmet } from 'react-helmet-async'
-import axios from 'axios'
 const Login = () => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -16,10 +15,8 @@ const Login = () => {
   // Google Signin
   const handleGoogleSignIn = async () => {
     try {
-      const result = await signInWithGoogle()
-
-      const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/jwt`,{user: result?.user?.email})
-      console.log(data);
+      await signInWithGoogle()
+      
 
       toast.success('Signin Successful')
       navigate(from, { replace: true })

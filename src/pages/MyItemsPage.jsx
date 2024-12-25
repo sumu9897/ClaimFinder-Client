@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../providers/AuthProvider';
 import { Helmet } from 'react-helmet-async';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const MyItemsPage = () => {
+    const axiosSecure = useAxiosSecure()
   const { user } = useContext(AuthContext);
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -16,8 +18,8 @@ const MyItemsPage = () => {
     if (!user?.email) return;
     const fetchMyItems = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/myItems/${user.email}`
+        const response = await axiosSecure.get(
+          `/myItems/${user.email}`
         );
         setItems(response.data);
       } catch (error) {
@@ -30,7 +32,7 @@ const MyItemsPage = () => {
   const handleDelete = async () => {
     if (!selectedItem) return;
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/items/${selectedItem._id}`);
+      await axiosSecure.delete(`/items/${selectedItem._id}`);
       setItems((prevItems) => prevItems.filter((item) => item._id !== selectedItem._id));
       setNotification('Item deleted successfully!');
     } catch (error) {

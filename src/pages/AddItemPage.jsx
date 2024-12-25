@@ -7,8 +7,10 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { FaTag, FaCalendarAlt, FaMapMarkerAlt, FaPhoneAlt, FaPen, FaImage } from 'react-icons/fa';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const AddItemPage = () => {
+    const axiosSecure = useAxiosSecure()
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
@@ -40,7 +42,7 @@ const AddItemPage = () => {
     };
 
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/add-item`, formData);
+      await axiosSecure.post(`/add-item`, formData);
       toast.success('Item added successfully!');
       navigate('/myItems');
     } catch (error) {

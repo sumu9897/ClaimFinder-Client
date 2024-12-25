@@ -22,7 +22,7 @@ const AllItemsPage = () => {
 
     const fetchAllItems = async () => {
         try {
-            const { data } = await axios.get('http://localhost:7000/allItems');
+            const { data } = await axios.get('https://server-eta-two-91.vercel.app/allItems');
             setItems(data);
             setFilteredItems(data);
             extractCategories(data);

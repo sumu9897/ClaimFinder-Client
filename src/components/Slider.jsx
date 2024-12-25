@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const Slider = () => {
   const slides = [
     {
-      text: 'Welcome to WhereIsIt! A Place to Find and Recover Lost Items',
+      text: 'Welcome to Claim Finder! A Place to Find and Recover Lost Items',
       bgImage: 'url(https://i.ibb.co.com/qJs3p4c/lost1.jpg)', 
     },
     {
@@ -13,7 +13,7 @@ const Slider = () => {
     },
     {
       text: 'Found Something? Help Others by Reporting It',
-      bgImage: 'url(/path-to-image3.jpg)', 
+      bgImage: 'url(https://i.ibb.co.com/wSHvK2s/lost3.jpg)', 
     },
   ];
 

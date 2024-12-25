@@ -7,8 +7,10 @@ import { toast } from 'react-hot-toast';
 import { AuthContext } from '../providers/AuthProvider';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Helmet } from 'react-helmet-async';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const ItemDetailsPage = () => {
+    const axiosSecure = useAxiosSecure()
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useContext(AuthContext); 
@@ -22,7 +24,7 @@ const ItemDetailsPage = () => {
   useEffect(() => {
     const fetchItem = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/items/${id}`);
+        const response = await axiosSecure.get(`/items/${id}`);
         setItem(response.data);
       } catch (error) {
         console.error('Failed to fetch item details:', error);
