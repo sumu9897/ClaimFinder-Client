@@ -5,15 +5,15 @@ const Slider = () => {
   const slides = [
     {
       text: 'Welcome to Claim Finder! A Place to Find and Recover Lost Items',
-      bgImage: 'url(https://i.ibb.co.com/qJs3p4c/lost1.jpg)', 
+      bgImage: 'url(https://i.ibb.co.com/sW6n3Sx/LOST-FOUND.png)', 
     },
     {
       text: 'Lost Something? Use Our Search Features to Reclaim It',
-      bgImage: 'url(https://i.ibb.co.com/86JNc58/lost2.jpg)', 
+      bgImage: 'url(https://i.ibb.co.com/y4mH1X0/LOST-FOUND-1.png)', 
     },
     {
       text: 'Found Something? Help Others by Reporting It',
-      bgImage: 'url(https://i.ibb.co.com/wSHvK2s/lost3.jpg)', 
+      bgImage: 'url(https://i.ibb.co.com/3yxDcqL/lost4.jpg)', 
     },
   ];
 

@@ -3,7 +3,7 @@
 [Live Site Link](https://whereisit-fde86.web.app/)
 
 ## Project Overview
-ClaimFinder is a full-stack web application designed to help users reconnect with their lost or found items. The platform allows users to report lost belongings, browse through found items, and recover their possessions through a secure and interactive interface.
+ClaimFinder is a comprehensive full-stack web application designed to bridge the gap between lost and found items. The platform enables users to report lost possessions, explore a catalog of found items, and securely reclaim their belongings through an intuitive and user-friendly interface.
 
 ## Key Features
 - **User Authentication**: Secure login and registration using email/password and Google login.
@@ -34,35 +34,6 @@ The application is deployed on Firebase, and the server is hosted on a productio
   - All Recovered Items (Private Route)
   - Manage My Items (Private Route)
 
-### Pages
-1. **Home Page**
-   - Banner/Slider with meaningful slides.
-   - Latest Lost & Found Items section showcasing the 6 most recent posts.
-   - "See All" button for exploring all items.
-   - Additional informative sections.
-
-2. **Add Lost & Found Item** (Private Route)
-   - A form to submit lost or found items with fields like title, description, category, and more.
-   - Secure image uploads and data storage.
-
-3. **Post Details Page**
-   - Displays all information about a specific item.
-   - Conditional buttons for "Found This!" or "This is Mine!" with recovery modals.
-
-4. **Lost & Found Items Page**
-   - Lists all items with options to view details.
-
-5. **Manage My Items** (Private Route)
-   - Displays user-added items in a table format with update and delete options.
-
-6. **Update Items Page** (Private Route)
-   - Allows users to edit and update their items with pre-filled data.
-
-7. **All Recovered Items Page** (Private Route)
-   - Displays all recovered items in a customizable layout.
-
-8. **404 Page**
-   - A visually appealing "Not Found" page for invalid routes.
 
 ### Extra Features
 - Pagination for the Lost & Found Items page (6-9 items per page).
