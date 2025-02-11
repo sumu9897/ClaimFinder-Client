@@ -11,6 +11,7 @@ import MyItemsPage from '../pages/MyItemsPage'
 import AllItemsPage from '../pages/AllItemsPage'
 import ItemDetailsPage from '../pages/ItemDetailsPage'
 import UpdateItemPage from '../pages/UpdateItemPage'
+import AboutPage from '../pages/AboutPage'
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: '/registration',
         element: <Register />,
+      },
+      {
+        path: '/about',
+        element: <AboutPage/>
       },
       {
         path: '/allItems',

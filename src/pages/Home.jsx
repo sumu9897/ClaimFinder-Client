@@ -45,6 +45,11 @@ const Home = () => {
               key={item._id}
               className="item-card bg-white border border-gray-200 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
             >
+              <img
+        src={item.thumbnail}
+        alt={item.title}
+        className="w-full h-40 object-cover rounded-md"
+      />
               <h3 className="text-xl font-semibold text-gray-800 truncate">{item.title}</h3>
               <p className="text-gray-600 mt-2">
                 <strong>Category:</strong> {item.category}
