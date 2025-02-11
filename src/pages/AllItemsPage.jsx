@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import ItemCard from '../components/itemCard';
 import { Helmet } from 'react-helmet-async';
+import { FaSpinner } from 'react-icons/fa'; // Importing FontAwesome spinner for loading
 
 const AllItemsPage = () => {
     const [items, setItems] = useState([]);
@@ -9,8 +10,10 @@ const AllItemsPage = () => {
     const [categories, setCategories] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
+    const [sortOrder, setSortOrder] = useState('asc'); // State for sorting order
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(9);
+    const [loading, setLoading] = useState(true); // Loading state
 
     useEffect(() => {
         fetchAllItems();
@@ -18,7 +21,7 @@ const AllItemsPage = () => {
 
     useEffect(() => {
         handleFilterByCategory();
-    }, [selectedCategory, searchQuery]);
+    }, [selectedCategory, searchQuery, sortOrder]);
 
     const fetchAllItems = async () => {
         try {
@@ -28,6 +31,8 @@ const AllItemsPage = () => {
             extractCategories(data);
         } catch (error) {
             console.error('Error fetching items:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -37,6 +42,7 @@ const AllItemsPage = () => {
     };
 
     const handleFilterByCategory = () => {
+        setLoading(true); // Start loading
         let result = [...items];
 
         // Filter by selected category
@@ -51,13 +57,24 @@ const AllItemsPage = () => {
             );
         }
 
+        // Sort by date if selected
+        if (sortOrder) {
+            result = result.sort((a, b) => {
+                const dateA = new Date(a.dateLost);
+                const dateB = new Date(b.dateLost);
+                return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+            });
+        }
+
         setFilteredItems(result);
         setCurrentPage(1); // Reset to the first page after filtering
+        setLoading(false); // End loading
     };
 
     const handleReset = () => {
         setSearchQuery('');
         setSelectedCategory('');
+        setSortOrder('asc');
         setFilteredItems(items);
         setCurrentPage(1); // Reset to the first page
     };
@@ -73,7 +90,7 @@ const AllItemsPage = () => {
     return (
         <div className='p-4 md:p-10 mx-auto'>
             <Helmet>
-                <title>AllItem</title>
+                <title>All Items</title>
             </Helmet>
             <div className="flex flex-wrap items-center gap-4 mb-6 px-4 md:px-12">
                 {/* Filter by Category */}
@@ -93,11 +110,21 @@ const AllItemsPage = () => {
                 {/* Search by Title */}
                 <input
                     type="text"
-                    placeholder="Enter Job Title"
+                    placeholder="Enter Item Title"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="border rounded-md p-2 flex-1"
                 />
+
+                {/* Sort By Date */}
+                <select
+                    className="border rounded-md p-2"
+                    value={sortOrder}
+                    onChange={(e) => setSortOrder(e.target.value)}
+                >
+                    <option value="asc">Sort by Date (Asc)</option>
+                    <option value="desc">Sort by Date (Desc)</option>
+                </select>
 
                 {/* Reset Button */}
                 <button
@@ -108,33 +135,42 @@ const AllItemsPage = () => {
                 </button>
             </div>
 
-            {/* Items Grid */}
-            <div className="grid grid-cols-1 gap-8 mt-8 lg:mt-16 px-16 md:grid-cols-2 lg:grid-cols-3">
-                {currentItems.map(item => (
-                    <ItemCard key={item._id} item={item} />
-                ))}
-            </div>
-
-            {/* Pagination */}
-            <div className="flex justify-center mt-8">
-                <nav>
-                    <ul className="flex space-x-2">
-                        {Array.from({ length: Math.ceil(filteredItems.length / itemsPerPage) }, (_, index) => (
-                            <li key={index}>
-                                <button
-                                    onClick={() => paginate(index + 1)}
-                                    className={`px-4 py-2 rounded-md ${currentPage === index + 1
-                                            ? 'bg-gray-800 text-white'
-                                            : 'bg-gray-200 hover:bg-gray-300'
-                                        }`}
-                                >
-                                    {index + 1}
-                                </button>
-                            </li>
+            {/* Loading Spinner */}
+            {loading ? (
+                <div className="flex justify-center items-center mt-10">
+                    <FaSpinner className="animate-spin text-4xl text-gray-600" />
+                </div>
+            ) : (
+                <>
+                    {/* Items Grid */}
+                    <div className="grid grid-cols-1 gap-8 mt-8 lg:mt-16 px-16 md:grid-cols-2 lg:grid-cols-3">
+                        {currentItems.map(item => (
+                            <ItemCard key={item._id} item={item} />
                         ))}
-                    </ul>
-                </nav>
-            </div>
+                    </div>
+
+                    {/* Pagination */}
+                    <div className="flex justify-center mt-8">
+                        <nav>
+                            <ul className="flex space-x-2">
+                                {Array.from({ length: Math.ceil(filteredItems.length / itemsPerPage) }, (_, index) => (
+                                    <li key={index}>
+                                        <button
+                                            onClick={() => paginate(index + 1)}
+                                            className={`px-4 py-2 rounded-md ${currentPage === index + 1
+                                                    ? 'bg-gray-800 text-white'
+                                                    : 'bg-gray-200 hover:bg-gray-300'
+                                                }`}
+                                        >
+                                            {index + 1}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </nav>
+                    </div>
+                </>
+            )}
         </div>
     );
 };
