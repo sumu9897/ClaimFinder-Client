@@ -85,7 +85,7 @@ const Navbar = () => {
                 <li><Link to="/allRecovered" className="hover:text-blue-600" onClick={() => setIsOpen(false)}>Recovered Items</Link></li>
                 <li><Link to="/myItems" className="hover:text-blue-600" onClick={() => setIsOpen(false)}>My Items</Link></li>
                 <li className="mt-2">
-                  <button onClick={handleLogOut} className="w-full bg-gray-200 py-2 rounded-md hover:bg-gray-300">
+                  <button onClick={handleLogOut} className="w-full bg-blue-200 py-2 px-5 rounded-md hover:bg-blue-300">
                     Logout
                   </button>
                 </li>
